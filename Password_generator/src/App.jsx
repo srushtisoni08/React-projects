@@ -1,34 +1,78 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState , useCallback, useEffect} from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [password, setPass] = useState("");
+  const [length , setLength ] = useState(8);
 
+  const [isNum, setNumber] = useState(false);
+  const [isSpecialChar, setSC] = useState(false);
+
+  let String = "QWERTYUIOPLKJHGFDSAZXCVBNMmnbvcxzasdfghjklpoiuytrewq";
+
+  const generate_password = useCallback(() =>{
+    let pass = "";
+
+    if (isNum) String += "1234567890";
+    if (isSpecialChar) String += "`~!@#$%^&*()-_=+[]{}\\|;:'\",.<>/?/";
+    
+    for(let i = 1; i <= length;i++){
+      let char = Math.floor(Math.random() * String.length);
+      pass += String[char];
+    }
+    setPass(pass);
+  },[isNum,isSpecialChar,setPass,length]);
+
+  useEffect(() => {
+    generate_password();
+  }, [generate_password]);
+
+  const copy_pass = () => {
+    window.navigator.clipboard.writeText(password);
+  }
+ 
   return (
-    <>
+    <div>
+      <h1>Password Generator</h1>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <input 
+          type="text" 
+          readOnly 
+          placeholder="Password" 
+          value={password}
+        />
+        <button onClick={copy_pass}>Copy</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div>
+        <div>
+          <input
+            type='range'
+            value={length}
+            min={5}
+            max={100}
+            onChange={(e) => {setLength(Number(e.target.value))}}
+          />
+          <h5>{length}</h5>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            checked={isNum}
+            onChange={() => setNumber(prev => !prev)}
+          />
+          <h5>Numbers</h5>
+        </div>
+
+        <div>
+          <input
+            type="checkbox"
+            checked={isSpecialChar}
+            onChange={() => setSC(prev => !prev)}
+          />
+          <h5>Special Characters</h5>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
