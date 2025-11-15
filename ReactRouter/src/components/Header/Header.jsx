@@ -52,6 +52,25 @@ export default function Header() {
                                     >
                                     ABOUT
                                     </NavLink>
+                                    <NavLink
+                                    to="/git"
+                                    className={({ isActive }) =>
+                                        `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 lg:p-0
+                                        ${isActive ? "text-orange-700" : "text-black"}`
+                                    }
+                                    >
+                                    Github
+                                    </NavLink>
+                                    <NavLink
+                                    to="/contact"
+                                    className={({ isActive }) =>
+                                        `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 lg:p-0
+                                        ${isActive ? "text-orange-700" : "text-black"}`
+                                    }
+                                    >
+                                    Contact Us
+                                    </NavLink>
+                                    
                             </li>
                             
                             
