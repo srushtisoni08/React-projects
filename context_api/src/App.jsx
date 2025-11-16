@@ -5,15 +5,16 @@ import Themebtn from './components/Themebtn'
 import Card from './components/Card'
 
 function App() {
-  const [theme,setTheme] = useState("Light") 
-  const DarkMode = () => setTheme("Dark");
-  const LightMode = () => setTheme("Light");
+  const [theme, setTheme] = useState("light");
+  const DarkMode = () => setTheme("dark");
+  const LightMode = () => setTheme("light");
   // Now we actually made all values portion of ThemeContext but it is not actually functional How will it know that I have to change colour so we will use useEffect to do this.
   
-  useEffect(()=> {
-    document.querySelector('html').classList.remove('Light','Dark')
-    document.querySelector('html').classList.add(theme)
-  },[setTheme])
+  useEffect(() => {
+  const html = document.documentElement;
+  html.classList.remove("light", "dark");
+  html.classList.add(theme);
+}, [theme]);
   //so here we removed everything and set that theme colour which we have set.
 
   return (
