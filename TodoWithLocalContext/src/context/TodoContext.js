@@ -9,10 +9,10 @@ export const TodoContest = createContext({
         }
     ],
 
-    add:(todo) => {},
+    addTodo:(todo) => {},
     deleteTodo: (id) => {},
-    update: (id, todo) => {},
-    ToggleCheckbox: (id) => {},
+    updateTodo: (id, todo) => {},
+    toggleCompleted: (id) => {},
 })
 
 export const useTodo = () => {

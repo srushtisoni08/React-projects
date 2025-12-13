@@ -13,7 +13,7 @@ function TodoForm() {
             todo,
             completed: false
         })
-        setTodo('')
+        setTodo("")
         //This simply work like as reload everything is set just we reloaded page for ux.
     }
     
