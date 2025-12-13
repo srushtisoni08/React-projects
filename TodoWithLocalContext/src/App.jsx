@@ -13,20 +13,22 @@ function App() {
     //If I write setTodos(todo) then it will erase whole array values and make this todo in array only so here me pass a function inside it in which we will write functionality to append
   }
   const updateTodo = (id,todo) => {
-    setTodos((prev) => {prev.map((prevTodo) => {prevTodo.id === id ? todo : prevTodo})})
+    setTodos((prev) => prev.map((prevTodo) => 
+      prevTodo.id === id ? { ...prevTodo, ...todo } : prevTodo
+    ))
     //here see we map so we get all todos with id nw we find that is id match with someone if yes then change it with this todo name else let it be as it is.
   }
 
   const deleteTodo= (id) => {
-    setTodos((prev)=>{prev.filter((todo)=>{todo.id !== id})})
+    setTodos((prev) => prev.filter((todo) => todo.id !== id))
   }
 
   const toggleComplete =(id) => {
-    setTodos(
-      (prev)=>{prev.map(
-        (prevTodo)=>{prevTodo.id === id? {...prevTodo, completed: !prevTodo.completed }:prevTodo}
-      )}
-    )
+    setTodos((prev) => prev.map((prevTodo) => 
+      prevTodo.id === id 
+        ? { ...prevTodo, completed: !prevTodo.completed }
+        : prevTodo
+    ))
   }
   // so here we map then check that does id match if yes then we toggled the value of prevTodo and other values like id, todo and all remain same so we wrote ...prevTodo else we keep it as it is.
   // so simply we overwrited completed component of context.

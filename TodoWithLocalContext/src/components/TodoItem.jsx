@@ -2,7 +2,7 @@ import { useTodo } from "../context/TodoContext";
 import {useState} from 'react'
 
 function TodoItem({ todo }) {
-    const {updateTodo, deleteTodo, toggleCompleted} = useTodo()
+    const {updateTodo, deleteTodo, toggleComplete} = useTodo()
     const [isTodoEditable, setIsTodoEditable] = useState(false)
     //when u edit then u have to write that edited msg so for that msg we make a hook
     const [todoMsg, setTodoMsg] = useState(todo.todo)
@@ -14,7 +14,7 @@ function TodoItem({ todo }) {
         setIsTodoEditable(false)//as we have changed the value so now it is not editable anymore.
     }
     const toggle = () =>{
-        toggleCompleted(todo.id)
+        toggleComplete(todo.id)
     }
  
     return (
@@ -27,7 +27,7 @@ function TodoItem({ todo }) {
                 type="checkbox"
                 className="cursor-pointer"
                 checked={todo.completed}
-                onChange={toggleCompleted}
+                onChange={toggle}
             />
             <input
                 type="text"
