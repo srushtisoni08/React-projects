@@ -1,5 +1,22 @@
+import { useTodo } from "../context/TodoContext";
+import {useState} from 'react'
+
 function TodoItem({ todo }) {
-    
+    const {update, deleteTodo, ToggleCheckbox} = useTodo()
+    const [isTodoEditable, setIsTodoEditable] = useState(false)
+    //when u edit then u have to write that edited msg so for that msg we make a hook
+    const [todoMsg, setTodoMsg] = useState(todo.todo)
+    // why todo.todo? so here in our function TodoItem we can see that we have a todo object means it have too many todos inside it so for selecting only 1 todo from that so we use todo.todo
+
+    const editTodo =() =>{
+        update(todo.id, {...todo,todo:todoMsg})
+        //so here for that id we just changed our todo msg 
+        setIsTodoEditable(false)//as we have changed the value so now it is not editable anymore.
+    }
+    const toggle = () =>{
+        ToggleCheckbox(todo.id)
+    }
+ 
     return (
         <div
             className={`flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3 shadow-sm shadow-white/50 duration-300  text-black ${
@@ -10,7 +27,7 @@ function TodoItem({ todo }) {
                 type="checkbox"
                 className="cursor-pointer"
                 checked={todo.completed}
-                onChange={toggleCompleted}
+                onChange={ToggleCheckbox}
             />
             <input
                 type="text"
