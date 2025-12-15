@@ -32,7 +32,7 @@ export const todoSlice = createSlice({
         },
     }
 })
-export const {addTodo, RemoveTodo} = todoSlice.actions
+export const {addTodo, removeTodo} = todoSlice.actions
 //need to export inidividual reducers as they will be used in components
 
 export default todoSlice.reducer
